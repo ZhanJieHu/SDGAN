@@ -20,6 +20,7 @@ PyTorch 2.X is recommended for better compatibility. PyTorch 1.13.1 is used here
 This example assumes that you have already installed the official **CUDA Toolkit 11.8** (backward compatible with CUDA 11.7 projects) released by NVIDIA (installation guide: https://docs.nvidia.com/cuda/archive/11.8.0/cuda-installation-guide-linux/index.html).
 - To **fully reproduce the complete SDGAN codebase** (including the use of VideoMamba), you must build the relevant modules from source. This requires installing the **full system-level CUDA Toolkit** (including the nvcc compiler and complete toolchain).
 - However, if you only want to **reproduce the core algorithmic ideas of SDGAN**, you can replace VideoMamba with the official `mamba-ssm` package (`pip install mamba-ssm`). This avoids the need to build from source and eliminates the dependency on a system-wide CUDA Toolkit installation.
+- To use mamba-ssm instead of VideoMamba, simply change "mode": "VideoMamba" to "mode": "mamba" in the config file.
 
 #### Permanently Configure CUDA Environment Variables
 ```bash
