@@ -5,7 +5,6 @@
   <a href="./README_zh.md"><img alt="简体中文版自述文件" src="https://img.shields.io/badge/简体中文-DFE0E5"></a>
 </p>
 
-> ZhanJie Hu, Bolin Zhang, Jianhua Wang, Jianbo Zheng, Takahiro Komamizu, Ichiro Ide, Jiangbo Qian
 
 <summary><b>📕 Table of Contents</b></summary>
 

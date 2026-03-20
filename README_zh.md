@@ -5,7 +5,6 @@
   <a href="./README_zh.md"><img alt="简体中文版自述文件" src="https://img.shields.io/badge/简体中文-DFE0E5"></a>
 </p>
 
-> 胡战捷, 张博麟, 王建华, 郑剑波, Takahiro Komamizu, Ichiro Ide, 钱江波
 
 <!-- ##### [Arxiv](https://arxiv.org/abs/2403.14174)？？   -->
    
