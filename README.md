@@ -10,6 +10,7 @@
 
 - [Task Definition](#task-definition)
 - [Main Framework](#main-framework)
+- [Data Preparation](./data_preparation/data_preparation_README.md)
 - [Environment Setting](./environment/env_README.md)
 - [Training](#training)
 - [Inference](#inference)
@@ -32,3 +33,8 @@ corresponds to given language queries.
 
 ## More Information
 
+### Acknowledgements
+This code is inspired by [UniSDNet](https://github.com/xian-sh/UniSDNet), [ReLoCLNet](https://github.com/26hzhang/ReLoCLNet) [OSGNet](https://github.com/Yisen-Feng/OSGNet). We thank the authors for their awesome open-source contributions.
+
+### Contact
+If there are any questions, feel free to open an issue or contact the author: Zhanjie Hu (ZhanJieHu@163.com)
