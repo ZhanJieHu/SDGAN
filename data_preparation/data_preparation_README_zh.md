@@ -11,9 +11,12 @@ https://rochester.app.box.com/s/8znalh6y5e82oml2lr7to8s6ntab6mav/folder/13747178
 
 # 静态特征
 
+## 下载
 静态特征连接：
 Static feature download link: 
-https://dx.doi.org/10.21227/t4rt-v882
+[huggingface](https://huggingface.co/datasets/ZhanjieHu/StaticFeature/tree/main)
+
+[IEEE DataPort](https://dx.doi.org/10.21227/t4rt-v882)
 ```bibtex
 @data{t4rt-v882-26,
 doi = {10.21227/t4rt-v882},
@@ -24,7 +27,8 @@ title = {Static Feature of ActivityNet Caption, Charades-STA, and TACoS},
 year = {2026} }
 ```
 
-## 准备方法：
+## 自己制备：
+如果你想自己准备静态特征，你可以按照以下步骤进行：
 ### 原视频下载
 #### ActivityNet
 [huggingface](https://huggingface.co/datasets/YimuWang/ActivityNet/tree/main)
@@ -41,4 +45,5 @@ year = {2026} }
 
 ## 特征提取
 静态特征的提取方法参考了 [OSDNet](https://github.com/Yisen-Feng/OSGNet/issues/4)。
-请参考[StaticFeature](./StaticFeature/README.md)
+
+详细步骤请看：[StaticFeature](./StaticFeature/README.md)

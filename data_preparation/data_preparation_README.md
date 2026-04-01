@@ -12,8 +12,11 @@ https://rochester.app.box.com/s/8znalh6y5e82oml2lr7to8s6ntab6mav/folder/13747178
 
 # Static Features
 
+## Download
 Static feature download link: 
-https://dx.doi.org/10.21227/t4rt-v882
+[huggingface](https://huggingface.co/datasets/ZhanjieHu/StaticFeature/tree/main)
+
+[IEEE DataPort](https://dx.doi.org/10.21227/t4rt-v882)
 ```bibtex
 @data{t4rt-v882-26,
 doi = {10.21227/t4rt-v882},
@@ -26,8 +29,8 @@ year = {2026} }
 
 
 
-## Preparation
-
+## Prepare by Youself
+If you want to prepare the static features by yourself, you can follow these steps:
 ### Download Original Videos
 
 #### ActivityNet
@@ -46,4 +49,4 @@ year = {2026} }
 
 The extraction method for static features is based on [OSDNet](https://github.com/Yisen-Feng/OSGNet/issues/4).
 
-Please refer to [StaticFeature](./StaticFeature/README.md) for detailed steps.
+For details, please refer to: [StaticFeature](./StaticFeature/README.md)
