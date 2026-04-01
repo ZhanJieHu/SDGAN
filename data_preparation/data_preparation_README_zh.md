@@ -11,7 +11,18 @@ https://rochester.app.box.com/s/8znalh6y5e82oml2lr7to8s6ntab6mav/folder/13747178
 
 # 静态特征
 
-静态特征连接：（有待更新）
+静态特征连接：
+Static feature download link: 
+https://dx.doi.org/10.21227/t4rt-v882
+```bibtex
+@data{t4rt-v882-26,
+doi = {10.21227/t4rt-v882},
+url = {https://dx.doi.org/10.21227/t4rt-v882},
+author = {Zhanjie Hu},
+publisher = {IEEE Dataport},
+title = {Static Feature of ActivityNet Caption, Charades-STA, and TACoS},
+year = {2026} }
+```
 
 ## 准备方法：
 ### 原视频下载
