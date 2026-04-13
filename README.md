@@ -9,7 +9,7 @@
 <summary><b>📕 Table of Contents</b></summary>
 
 - [Task Definition](#task-definition)
-- [Main Framework](#main-framework)
+- [Innovation](#innovation)
 - [Data Preparation](./data_preparation/data_preparation_README.md)
 - [Environment Setting](./environment/env_README.md)
 - [Training](#training)
@@ -19,12 +19,30 @@
 
 
 ## Task Definition
+
+Temporal Video Grounding (TVG) also known as: Temporal sentence grounding in videos (TSGV), natural language video localization (NLVL), video moment retrieval (VMR).
+
 The objective of **Temporal Video Grounding (TVG)** is to
 localize the precise moment in an untrimmed video that
 corresponds to given language queries.
 
-## Main Framework
+![](./images/TVG_definition.png)
 
+## Innovation
+
+![the proposed SDGAN](./images/1b_0313.png)
+
+The figure above provides a simple illustration of the proposed **Static and Dynamic Graph Alignment Network (SDGAN)**. The model introduces two key innovations:
+
+- **Effective exploitation of both static and dynamic visual features**:  
+  Unlike existing methods that typically rely on either static or dynamic visual features alone, SDGAN successfully integrates both. It employs several techniques — including **Position-wise Nodes Alignment** (as shown in the figure) — to effectively exploit and mitigate the semantic discrepancy between static and dynamic features. 
+
+- **Query-aware video feature construction**:  
+  GCN-based approaches construct temporal graphs in a query-agnostic manner, where video features interact according to predefined rules without guidance from the video content or the specific query.  
+  To address this limitation, SDGAN introduces **Query–Clip Contrastive Learning** and **Adaptive Graph Modeling** (illustrated in the figure). This query-aware approach produces more discriminative node representations, leading to stronger temporal graph modeling.
+
+
+The detailed mechanisms are presented in the paper.
 ## Training
 
 ## Inference
