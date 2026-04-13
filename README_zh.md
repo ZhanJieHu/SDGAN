@@ -18,8 +18,7 @@
 - [创新点](#创新点)
 - [数据准备](./data_preparation/data_preparation_README_zh.md)
 - [环境配置](./environment/env_README_zh.md)
-- [训练](#训练)
-- [推理](#推理)
+- [文件与目录说明](#文件与目录说明)
 - [主要结果](#主要结果)
 - [更多信息](#更多信息)
 
@@ -41,11 +40,55 @@
   为解决这一问题，SDGAN提出了**查询-节点对比学习**和**自适应图建模**（如图所示）。这种查询感知的视频特征构建方式能够生成更具区分性的节点表示，从而显著提升时序图建模的效果。
 
 具体机制详见论文。
-## 训练
 
-## 推理
+## 文件与目录说明
+```plaintext
+MAIN_CODE/
+├── test1.py                    # 推理入口，可在此配置参数
+├── train1.py                   # 训练入口，可在此配置参数
+├── UTiLs/                      # 通用工具函数与辅助脚本
+│     └─ CheckParameters/                    
+│           └── PrintObj.py     # 工具类：用于打印复杂数据结构详情
+├── dataset/                    # 各数据集标注与标签文件
+├── configs/                    # 数据集相关配置文件
+│   └── config_baby.yaml        # 示例调试数据集配置，含详细注释
+├── good_testing/               # 项目辅助测试脚本
+├── data/                       # 数据集根目录
+│   └── baby/                   # 示例调试数据集（baby）
+│       ├── frame_feature/      # 静态视觉特征
+│       ├── i3d_features.hdf5   # 动态 I3D 视频特征
+│       └── text_feature/       # 文本查询特征
+└── model_all/                  # 模型主体模块
+    ├── engine/                 # 训练/推理流程控制
+    │   └── StageManager.py     # 工具：训练阶段调度与管理
+    ├── modeling/               # 核心模型定义
+    │   ├── Movie.py            # 视频特征管理类
+    │   └── main_model.py       # SDGAN 模型主体实现
+    ├── data/                   # 数据加载与预处理模块
+                                # 采用桥接模式设计：统一兼容多数据集与多模态数据
+    └── subassembly/            # 模型子组件与基础模块
+```
+
+### 训练
+```bash
+python train1.py \
+  --config-file configs/config_baby.yaml \
+  --device cuda:7 \
+  --tag train_test
+```
+### 推理
+```bash
+python test1.py \
+  --config-file checkpoints/train_test/config.yml \ # 使用训练后保存的展开配置
+  --ckpt checkpoints/train_test/model_30e.pth \
+  --device cuda:6
+```
 
 ## 主要结果
+我们在三个广泛使用的视频时序定位（TVG）基准数据集上，将本文提出的 SDGAN 与当前最优方法进行了对比，结果汇总于下表。
+总体而言，SDGAN 在绝大多数评价指标上均取得了最优性能。[UniSDNet*](https://github.com/xian-sh/UniSDNet) 的结果系采用其公开源代码复现得到。
+
+![](./images/table2.png)
 
 ## 更多信息
 
