@@ -1,0 +1,347 @@
+{
+  "MODEL": {
+    "DEVICE": "",
+    "ARCHITECTURE": "unet",
+    "VIDEO_MODE": "c3d",
+    "NUM_CLIPS": 128,
+    "merge_num": 2,
+    "align_loss":{
+      "mode": "video",
+    },
+    "feature_merger": {
+      "mode":"max",
+    },
+    "hidden_dimension": 256,
+    "video": {
+      "encoder": {
+        "mode": "featpool+linear",
+        "v_feat_len": 512,
+        "v_feat_dim": 500,
+        "FEATPOOL": {
+          "KERNEL_SIZE": 4,
+          "HIDDEN_SIZE": 512
+        }
+      },
+      "gnn": {
+        "mode": "GNNv3",
+        "GNN_LAYERS": 2,
+        "GNN_U": 5.0,
+        "GNN_STEP": 0.1
+      },
+      "temporal_feature_map": {
+        "mode": "pool",
+      },
+      "mask_1": {
+        "mode": "upper"
+      },
+      "mask_2": {
+        "mode": "sparse",
+        "pooling_list":[15,8,8,8]
+      },
+      "proposal_conv": {
+        "mode": 'decoupled',
+        "HIDDEN_SIZE": 512,
+        "KERNEL_SIZE": 5,
+        "NUM_STACK_LAYERS": 3
+      },
+      "LOSS": {
+        "iou_bce": {
+          "mode": 'decoupled',
+          "MIN_IOU": 0.3,
+          "MAX_IOU": 0.7
+        },
+        "ContrastiveLoss": {
+          "mode": 'decoupled',
+          "TAU_VIDEO": 0.1,
+          "TAU_SENT": 0.1,
+          "NEGATIVE_VIDEO_IOU": 0.5,
+          "NUM_POSTIVE_VIDEO_PROPOSAL": 3,
+          "SENT_REMOVAL_IOU": 0.5,
+          "MARGIN": 0.1
+        },
+      }
+    },
+    "frame": {
+      "encoder": {
+        "mode": "bimamba",
+        "f_feat_dim": 768
+      },
+      "gnn": {
+        "mode": "GNNv3",
+        "GNN_LAYERS": 2,
+        "GNN_U": 5.0,
+        "GNN_STEP": 0.1
+      },
+      "temporal_feature_map": {
+        "mode": "pool",
+      },
+      "mask_1": {
+        "mode": "upper"
+      },
+      "mask_2": {
+        "mode": "sparse",
+        "pooling_list":[15,8,8,8]
+      },
+      "proposal_conv": {
+        "mode": 'decoupled',
+        "HIDDEN_SIZE": 512,
+        "KERNEL_SIZE": 5,
+        "NUM_STACK_LAYERS": 3
+      },
+      "LOSS": {
+        "iou_bce": {
+          "mode": 'decoupled',
+          "MIN_IOU": 0.3,
+          "MAX_IOU": 0.7
+        },
+        "ContrastiveLoss": {
+          "mode": 'decoupled',
+          "TAU_VIDEO": 0.1,
+          "TAU_SENT": 0.1,
+          "NEGATIVE_VIDEO_IOU": 0.5,
+          "NUM_POSTIVE_VIDEO_PROPOSAL": 3,
+          "SENT_REMOVAL_IOU": 0.5,
+          "MARGIN": 0.1
+        },
+      }
+    },
+    "text": {
+      "encoder": {
+        "mode": "one"
+      },
+      "decoder": {
+        "mode": "two"
+      }
+    },
+    "pos_encoding": {
+      "mode": "sine"
+    },
+    "no_sta": "False",
+    "no_dyn": "False",
+    "no_QCCL": "False",
+    "no_learned_edge": "False"
+  },
+  "DATASETS": {
+    "NAME": "SDGANtacos",
+    "train_label": "/media/zhangbolin/hu/OSGs/open_source/MAIN_CODE/dataset/TACoS/train.json",
+    "test_label": "/media/zhangbolin/hu/OSGs/open_source/MAIN_CODE/dataset/TACoS/test.json",
+    "val_label": "/media/zhangbolin/hu/OSGs/open_source/MAIN_CODE/dataset/TACoS/val.json",
+    "video_feat": "/media/zhangbolin/hu/OSGs/unet/data/tacos/tacos_video.hdf5",
+    "nclip_in_v_feat": 512,
+    "frame_feat": "/media/zhangbolin/hu/OSGs/unet/data/tacos/clip_feature",
+    "VideoSegmentTxt": "",
+    "f_feat_dim": 768,
+    "object_feat": "",
+    "text_feat": "/media/zhangbolin/hu/OSGs/unet/data/tacos/text_distbert_feat_new",
+    "audio_feat": "",
+    "chinese_feat": ""
+  },
+  "DATALOADER": {
+    "NUM_WORKERS": 48
+  },
+  "SOLVER": {
+    "LR": 0.0015,
+    "BATCH_SIZE": 4,
+    "MILESTONES": "(130, 190)",
+    "training_stages": [
+      {
+        "stage_name": "Lclip",
+        "NumberOfEpochs": 10,
+        "enabled_modals": [
+          "Lv": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6},
+          "Lf": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4},
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+      {
+        "stage_name": "clip",
+        "NumberOfEpochs": 10,
+        "enabled_modals": [
+          "v": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6},
+          "f": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4},
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+      {
+        "stage_name": "Lclip",
+        "NumberOfEpochs": 10,
+        "enabled_modals": [
+          "Lv": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6},
+          "Lf": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4},
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+      {
+        "stage_name": "clip",
+        "NumberOfEpochs": 10,
+        "enabled_modals": [
+          "v": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6},
+          "f": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4},
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+      {
+        "stage_name": "Lclip",
+        "NumberOfEpochs": 10,
+        "enabled_modals": [
+          "Lv": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6},
+          "Lf": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4},
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+      {
+        "stage_name": "clip",
+        "NumberOfEpochs": 10,
+        "enabled_modals": [
+          "v": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6},
+          "f": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4},
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+      {
+        "stage_name": "Lclip",
+        "NumberOfEpochs": 10,
+        "enabled_modals": [
+          "Lv": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6},
+          "Lf": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4},
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+      {
+        "stage_name": "clip",
+        "NumberOfEpochs": 10,
+        "enabled_modals": [
+          "v": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6},
+          "f": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4},
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+      {
+        "stage_name": "Lclip",
+        "NumberOfEpochs": 10,
+        "enabled_modals": [
+          "Lv": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6},
+          "Lf": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4},
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+      {
+        "stage_name": "clip",
+        "NumberOfEpochs": 10,
+        "enabled_modals": [
+          "v": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6},
+          "f": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4},
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+      {
+        "stage_name": "Lclip",
+        "NumberOfEpochs": 10,
+        "enabled_modals": [
+          "Lv": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6},
+          "Lf": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4},
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+      {
+        "stage_name": "clip",
+        "NumberOfEpochs": 10,
+        "enabled_modals": [
+          "v": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6},
+          "f": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4},
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+      {
+        "stage_name": "Lclip",
+        "NumberOfEpochs": 10,
+        "enabled_modals": [
+          "Lv": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6},
+          "Lf": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4},
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+      {
+        "stage_name": "clip",
+        "NumberOfEpochs": 10,
+        "enabled_modals": [
+          "v": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6},
+          "f": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4},
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+    ],
+    "test_stage": {
+      'enable_print': False,
+      'save_dir': "",
+      'v_weight': 0.6,
+      'f_weight': 0.4,
+    },
+    "CHECKPOINT_PERIOD": 140,
+    "VAL_PERIOD": -1,
+    "RESUME": false,
+    "SKIP_TEST": 0,
+  },
+  "TEST": {
+    "BATCH_SIZE": 4,
+    "NMS_THRESH": 0.4,
+  },
+  "validation_functions": ["check_feat_len", "mask_pooling_list"],
+  "OUTPUT_DIR": "/media/zhangbolin/hu/OSGs/open_source/checkpoints/TACoS/"
+}

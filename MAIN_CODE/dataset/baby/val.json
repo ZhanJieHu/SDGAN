@@ -1,0 +1,585 @@
+{
+    "AO8RW": {
+        "duration": 33.67,
+        "timestamps": [
+            [
+                0.0,
+                6.9
+            ]
+        ],
+        "sentences": [
+            "a person is putting a book on a shelf."
+        ],
+        "audios": [
+            "AO8RW_train_1.wav"
+        ],
+        "speaker": "cmu_us_ksp_arctic-wav-arctic_b0030",
+        "speaker_id": 5157
+    },
+    "Y6R7T": {
+        "duration": 29.42,
+        "timestamps": [
+            [
+                7.3,
+                17.3
+            ],
+            [
+                7.3,
+                17.3
+            ],
+            [
+                7.3,
+                17.3
+            ],
+            [
+                20.8,
+                29.42
+            ],
+            [
+                20.8,
+                29.42
+            ]
+        ],
+        "sentences": [
+            "person pouring it into a glass.",
+            "the person pours some water into the glass.",
+            "person pours water into a glass.",
+            "person begins to play on a phone.",
+            "person start playing on their phone."
+        ],
+        "audios": [
+            "Y6R7T_train_3.wav",
+            "Y6R7T_train_4.wav",
+            "Y6R7T_train_5.wav",
+            "Y6R7T_train_1.wav",
+            "Y6R7T_train_2.wav"
+        ],
+        "speaker": "cmu_us_awb_arctic-wav-arctic_a0236",
+        "speaker_id": 235
+    },
+    "IGDIE": {
+        "duration": 33.12,
+        "timestamps": [
+            [
+                22.7,
+                33.12
+            ]
+        ],
+        "sentences": [
+            "person starts watching television."
+        ],
+        "audios": [
+            "IGDIE_train_1.wav"
+        ],
+        "speaker": "cmu_us_jmk_arctic-wav-arctic_a0578",
+        "speaker_id": 3980
+    },
+    "7UPGT": {
+        "duration": 23.21,
+        "timestamps": [
+            [
+                13.9,
+                19.7
+            ]
+        ],
+        "sentences": [
+            "person takes a cup out the fridge."
+        ],
+        "audios": [
+            "7UPGT_train_1.wav"
+        ],
+        "speaker": "cmu_us_ksp_arctic-wav-arctic_b0065",
+        "speaker_id": 5192
+    },
+    "KBPDM": {
+        "duration": 34.88,
+        "timestamps": [
+            [
+                0.0,
+                11.1
+            ],
+            [
+                3.1,
+                18.7
+            ],
+            [
+                7.1,
+                13.6
+            ]
+        ],
+        "sentences": [
+            "a person is awakening.",
+            "holding a small personal mirror.",
+            "person sneezing on a mirror."
+        ],
+        "audios": [
+            "KBPDM_train_2.wav",
+            "KBPDM_train_3.wav",
+            "KBPDM_train_1.wav"
+        ],
+        "speaker": "cmu_us_awb_arctic-wav-arctic_b0309",
+        "speaker_id": 905
+    },
+    "IBIWF": {
+        "duration": 30.79,
+        "timestamps": [
+            [
+                0.0,
+                14.5
+            ]
+        ],
+        "sentences": [
+            "a person is playing with their camera."
+        ],
+        "audios": [
+            "IBIWF_train_1.wav"
+        ],
+        "speaker": "cmu_us_clb_arctic-wav-arctic_a0493",
+        "speaker_id": 2763
+    },
+    "372CC": {
+        "duration": 30.5,
+        "timestamps": [
+            [
+                17.5,
+                29.9
+            ],
+            [
+                17.5,
+                29.9
+            ]
+        ],
+        "sentences": [
+            "a person is sitting in front of a computer sneezing.",
+            "person starts sneezing."
+        ],
+        "audios": [
+            "372CC_train_1.wav",
+            "372CC_train_2.wav"
+        ],
+        "speaker": "cmu_us_slt_arctic-wav-arctic_b0422",
+        "speaker_id": 7813
+    },
+    "N14BK": {
+        "duration": 47.46,
+        "timestamps": [
+            [
+                39.3,
+                45.0
+            ]
+        ],
+        "sentences": [
+            "person put a notebook in a bag."
+        ],
+        "audios": [
+            "N14BK_train_1.wav"
+        ],
+        "speaker": "cmu_us_clb_arctic-wav-arctic_b0032",
+        "speaker_id": 2895
+    },
+    "NQT1S": {
+        "duration": 30.21,
+        "timestamps": [
+            [
+                18.3,
+                30.21
+            ]
+        ],
+        "sentences": [
+            "person all of a sudden they start sneezing."
+        ],
+        "audios": [
+            "NQT1S_train_1.wav"
+        ],
+        "speaker": "cmu_us_ksp_arctic-wav-arctic_a0522",
+        "speaker_id": 5056
+    },
+    "F1VEE": {
+        "duration": 32.71,
+        "timestamps": [
+            [
+                15.1,
+                23.8
+            ],
+            [
+                15.1,
+                23.8
+            ],
+            [
+                15.1,
+                23.8
+            ],
+            [
+                19.2,
+                28.2
+            ],
+            [
+                27.0,
+                32.0
+            ]
+        ],
+        "sentences": [
+            "person they put on their shoes.",
+            "person puts on shoes.",
+            "person put some shoes on.",
+            "person they take a mobile phone.",
+            "person opening a door."
+        ],
+        "audios": [
+            "F1VEE_train_2.wav",
+            "F1VEE_train_3.wav",
+            "F1VEE_train_5.wav",
+            "F1VEE_train_4.wav",
+            "F1VEE_train_1.wav"
+        ],
+        "speaker": "cmu_us_awb_arctic-wav-arctic_a0145",
+        "speaker_id": 144
+    },
+    "YDWN5": {
+        "duration": 13.62,
+        "timestamps": [
+            [
+                6.2,
+                12.6
+            ]
+        ],
+        "sentences": [
+            "a person tidying a wardrobe in an entryway is smiling."
+        ],
+        "audios": [
+            "YDWN5_train_1.wav"
+        ],
+        "speaker": "cmu_us_jmk_arctic-wav-arctic_b0230",
+        "speaker_id": 4225
+    },
+    "QRWQ3": {
+        "duration": 35.71,
+        "timestamps": [
+            [
+                19.1,
+                29.0
+            ],
+            [
+                19.1,
+                29.0
+            ]
+        ],
+        "sentences": [
+            "a person cooking on the stove.",
+            "a person is cooking something on a stove."
+        ],
+        "audios": [
+            "QRWQ3_train_1.wav",
+            "QRWQ3_train_2.wav"
+        ],
+        "speaker": "cmu_us_slt_arctic-wav-arctic_b0360",
+        "speaker_id": 7751
+    },
+    "SFHHR": {
+        "duration": 31.25,
+        "timestamps": [
+            [
+                21.5,
+                28.0
+            ]
+        ],
+        "sentences": [
+            "the person puts the coffee on the table."
+        ],
+        "audios": [
+            "SFHHR_train_1.wav"
+        ],
+        "speaker": "cmu_us_clb_arctic-wav-arctic_a0527",
+        "speaker_id": 2797
+    },
+    "HWYTN": {
+        "duration": 30.33,
+        "timestamps": [
+            [
+                0.0,
+                4.0
+            ],
+            [
+                0.0,
+                4.0
+            ],
+            [
+                0.0,
+                4.0
+            ]
+        ],
+        "sentences": [
+            "another person runs out the room.",
+            "another man running past.",
+            "another person is running in shoes."
+        ],
+        "audios": [
+            "HWYTN_train_1.wav",
+            "HWYTN_train_2.wav",
+            "HWYTN_train_3.wav"
+        ],
+        "speaker": "cmu_us_rms_arctic-wav-arctic_b0393",
+        "speaker_id": 6652
+    },
+    "GG4UR": {
+        "duration": 19.71,
+        "timestamps": [
+            [
+                0.0,
+                3.6
+            ],
+            [
+                0.0,
+                3.6
+            ],
+            [
+                0.0,
+                3.6
+            ],
+            [
+                10.0,
+                15.4
+            ],
+            [
+                10.0,
+                15.4
+            ]
+        ],
+        "sentences": [
+            "a person is seen watching television.",
+            "a person is watching television on the sofa.",
+            "person is sitting on couch watching television.",
+            "person opens door to closet.",
+            "person seen opening the door to a hallway closet."
+        ],
+        "audios": [
+            "GG4UR_train_2.wav",
+            "GG4UR_train_3.wav",
+            "GG4UR_train_4.wav",
+            "GG4UR_train_1.wav",
+            "GG4UR_train_5.wav"
+        ],
+        "speaker": "cmu_us_jmk_arctic-wav-arctic_a0060",
+        "speaker_id": 3462
+    },
+    "XDVAY": {
+        "duration": 31.79,
+        "timestamps": [
+            [
+                0.0,
+                7.9
+            ]
+        ],
+        "sentences": [
+            "a person is awakening in bed."
+        ],
+        "audios": [
+            "XDVAY_train_1.wav"
+        ],
+        "speaker": "cmu_us_slt_arctic-wav-arctic_b0058",
+        "speaker_id": 7449
+    },
+    "MLBTH": {
+        "duration": 30.54,
+        "timestamps": [
+            [
+                0.0,
+                8.0
+            ],
+            [
+                0.0,
+                8.0
+            ],
+            [
+                0.0,
+                8.0
+            ]
+        ],
+        "sentences": [
+            "person opens a laptop.",
+            "a person opens a laptop.",
+            "the person opens up a laptop."
+        ],
+        "audios": [
+            "MLBTH_train_1.wav",
+            "MLBTH_train_2.wav",
+            "MLBTH_train_3.wav"
+        ],
+        "speaker": "cmu_us_bdl_arctic-wav-arctic_a0065",
+        "speaker_id": 1202
+    },
+    "IR31O": {
+        "duration": 30.96,
+        "timestamps": [
+            [
+                1.3,
+                7.7
+            ],
+            [
+                5.6,
+                12.9
+            ]
+        ],
+        "sentences": [
+            "a person is opening a book.",
+            "person drinking a glass of water."
+        ],
+        "audios": [
+            "IR31O_train_2.wav",
+            "IR31O_train_1.wav"
+        ],
+        "speaker": "cmu_us_ksp_arctic-wav-arctic_b0269",
+        "speaker_id": 5396
+    },
+    "KX8VW": {
+        "duration": 21.96,
+        "timestamps": [
+            [
+                0.0,
+                5.5
+            ],
+            [
+                5.9,
+                15.4
+            ],
+            [
+                16.3,
+                21.96
+            ]
+        ],
+        "sentences": [
+            "person sitting on the sofa eating out of a dish.",
+            "person pours some water into a glass.",
+            "person put back on the table."
+        ],
+        "audios": [
+            "KX8VW_train_3.wav",
+            "KX8VW_train_2.wav",
+            "KX8VW_train_1.wav"
+        ],
+        "speaker": "cmu_us_ksp_arctic-wav-arctic_b0247",
+        "speaker_id": 5374
+    },
+    "NVBBD": {
+        "duration": 31.17,
+        "timestamps": [
+            [
+                0.0,
+                6.5
+            ],
+            [
+                0.0,
+                6.5
+            ],
+            [
+                0.0,
+                6.5
+            ],
+            [
+                19.1,
+                31.17
+            ],
+            [
+                19.1,
+                31.17
+            ],
+            [
+                19.1,
+                31.17
+            ]
+        ],
+        "sentences": [
+            "a person opens up a door.",
+            "person they open the door.",
+            "a person opens a door by grasping a doorknob.",
+            "person puts his shoes on.",
+            "person puts on a shoe.",
+            "person start putting shoes on."
+        ],
+        "audios": [
+            "NVBBD_train_1.wav",
+            "NVBBD_train_4.wav",
+            "NVBBD_train_6.wav",
+            "NVBBD_train_2.wav",
+            "NVBBD_train_3.wav",
+            "NVBBD_train_5.wav"
+        ],
+        "speaker": "cmu_us_jmk_arctic-wav-arctic_b0458",
+        "speaker_id": 4453
+    },
+    "4C4LC": {
+        "duration": 31.5,
+        "timestamps": [
+            [
+                27.3,
+                31.5
+            ]
+        ],
+        "sentences": [
+            "person also turning off the light."
+        ],
+        "audios": [
+            "4C4LC_train_1.wav"
+        ],
+        "speaker": "cmu_us_clb_arctic-wav-arctic_b0099",
+        "speaker_id": 2962
+    },
+    "J4GX8": {
+        "duration": 29.21,
+        "timestamps": [
+            [
+                0.0,
+                8.4
+            ],
+            [
+                16.6,
+                22.2
+            ],
+            [
+                16.6,
+                22.2
+            ],
+            [
+                18.8,
+                27.3
+            ]
+        ],
+        "sentences": [
+            "person holding a glass.",
+            "person appear to take some medicine by swallowing it.",
+            "the person can take their medicine.",
+            "person drinking a glass of water."
+        ],
+        "audios": [
+            "J4GX8_train_2.wav",
+            "J4GX8_train_3.wav",
+            "J4GX8_train_4.wav",
+            "J4GX8_train_1.wav"
+        ],
+        "speaker": "cmu_us_clb_arctic-wav-arctic_a0246",
+        "speaker_id": 2516
+    },
+    "HPEE5": {
+        "duration": 24.21,
+        "timestamps": [
+            [
+                12.6,
+                21.4
+            ],
+            [
+                20.3,
+                24.21
+            ]
+        ],
+        "sentences": [
+            "person open a door.",
+            "person close the door."
+        ],
+        "audios": [
+            "HPEE5_train_2.wav",
+            "HPEE5_train_1.wav"
+        ],
+        "speaker": "cmu_us_slt_arctic-wav-arctic_a0253",
+        "speaker_id": 7051
+    }
+}

@@ -1,0 +1,181 @@
+{
+  "MODEL": { # config for model architecture
+    "DEVICE": "", # Enter on the command line or set in a .py file., filled in when running
+    "ARCHITECTURE": "unet", # model name. "unet" is SDGAN in paper.
+    "VIDEO_MODE": "i3d", # dynamic feature type, 
+    "NUM_CLIPS": 64,  # number of fine-grained clips in each video
+    "merge_num": 2, # number of adjacent fine-grained clips to be merged into one coarse-grained clips. The number of coarse-grained clips: NUM_CLIPS//merge_num
+    "align_loss":{ # In Position-wise Nodes Alignment (PNA) loss: # mode="video": compare nodes within the same video. # mode="batch": compare nodes within the same batch.
+      "mode": "video",
+    },
+    "feature_merger": { # the way to merge fine-grained clips
+      "mode":"max",
+    },
+    "hidden_dimension": 256,
+    "video": { # config for dynamic feature stream
+      "encoder": { # Dynamic Encoder. Remark: Dynamic Encoder and Static Encoder share the same underlying programming logic.
+        "mode": "featpool+linear",
+        "v_feat_len": 128,
+        "v_feat_dim": 1024,
+        "FEATPOOL": {
+          "KERNEL_SIZE": 2,
+          "HIDDEN_SIZE": 512
+        }
+      },
+      "gnn": { # Adaptive Graph Modeling
+        "mode": "GNNv3",
+        "GNN_LAYERS": 2, # number of Graph layers
+        "GNN_U": 5.0,     # RBF hyperparameter
+        "GNN_STEP": 0.1   # RBF hyperparameter
+      },
+      "temporal_feature_map": { # The function that arrange dynamic feature into an initial 2D map in Multi-Granularity Proposal Feature Construction
+        "mode": "pool", # no need to change.
+      },
+      "mask_1": { # mask for the coarse-grained temporal proposal
+        "mode": "sparse", # sparse: 2d-tan like mask, "upper": upper triangular mask
+      },
+      "mask_2": { # mask for the fine-grained temporal proposal
+        "mode": "sparse",
+      },
+      "proposal_conv": { # The function that obtain the final proposal representations by initial 2D map in Multi-Granularity Proposal Feature Construction
+        "mode": '1t1', # recommend: "pro"
+      },
+      "LOSS": { 
+        "iou_bce": { # IoU Regression loss for dynamic feature
+          "mode": 'decoupled', # Hyperparameters that are self-explanatory from the function definition.
+          "MIN_IOU": 0.5,
+          "MAX_IOU": 1.0
+        },
+        "ContrastiveLoss": { # Query-Proposal contrastive learning loss for dynamic feature
+          "mode": 'decoupled', # Hyperparameters that are self-explanatory from the function definition.
+          "TAU_VIDEO": 0.1,
+          "TAU_SENT": 0.1,
+          "NEGATIVE_VIDEO_IOU": 0.5,
+          "NUM_POSTIVE_VIDEO_PROPOSAL": 1,
+          "SENT_REMOVAL_IOU": 0.5,
+          "MARGIN": 0.4
+        },
+      }
+    },
+    "frame": { # config for static feature stream, the setting is similar to "video"
+      "encoder": { # Static Encoder. 
+        "mode": "bimamba", # If you have trouble in VideoMamba, you can change to other encoders.
+        "f_feat_dim": 768
+      },
+      "gnn": {
+        "mode": "GNNv3",
+        "GNN_LAYERS": 2,
+        "GNN_U": 5.0,
+        "GNN_STEP": 0.1
+      },
+      "temporal_feature_map": { 
+        "mode": "pool", 
+      },
+      "mask_1": {
+        "mode": "sparse",
+      },
+      "mask_2": {
+        "mode": "sparse",
+      },
+      "proposal_conv": { 
+        "mode": '1t1', 
+      },
+      "LOSS": { 
+        "iou_bce": {
+          "mode": 'decoupled',
+          "MIN_IOU": 0.3,
+          "MAX_IOU": 0.7
+        },
+        "ContrastiveLoss": {
+          "mode": 'decoupled',
+          "TAU_VIDEO": 0.1,
+          "TAU_SENT": 0.1,
+          "NEGATIVE_VIDEO_IOU": 0.5,
+          "NUM_POSTIVE_VIDEO_PROPOSAL": 3,
+          "SENT_REMOVAL_IOU": 0.5,
+          "MARGIN": 0.1
+        },
+      }
+    },
+    "text": {
+      "encoder": { # Text Encoder.
+        "mode": "one"
+      },
+      "decoder": { # Text Decoder
+        "mode": "two"
+      }
+    },
+    "pos_encoding": { # Position encoding for Multimodal Fusion Network
+      "mode": "none" # Recommend no position encoding
+    }
+  },
+  "DATASETS": {
+    "NAME": "SDGANcharades", # charades
+    "train_label": "/media/zhangbolin/hu/OSGs/unet/dataset/baby/tarin.json", # Remark: "audios" in label files means query.
+    "test_label": "/media/zhangbolin/hu/OSGs/unet/dataset/baby/test.json",
+    "val_label": "/media/zhangbolin/hu/OSGs/unet/dataset/baby/val.json",
+    "video_feat": "/media/zhangbolin/datasets/baby/i3d_features.hdf5", # dynamic feature path
+    "nclip_in_v_feat": 128, # The feature lengths for each video in the Charades i3d dataset are inconsistent; they are uniformly interpolated to a length of 128.
+    "frame_feat": "/media/zhangbolin/datasets/baby/frame_feature", # static feature path
+    "VideoSegmentTxt": "", # obsolete
+    "f_feat_dim": 768,
+    "object_feat": "", # obsolete
+    "text_feat": "/media/zhangbolin/datasets/baby/text_feature", # query feature path
+    "audio_feat": "", # obsolete
+    "chinese_feat": "" # obsolete
+  },
+  "DATALOADER": { 
+    "NUM_WORKERS": 1 # number of workers for dataloader. 
+  },
+  "SOLVER": {
+    "LR": 0.001, # learning rate
+    "BATCH_SIZE": 14, # batch size in training stage
+    "MILESTONES": "(8, 13)", # Upon reaching the specified milestone epochs, the learning rate decays by a factor of gamma (0.1).
+    "training_stages": [ # training stages. Each stage can be configured with different loss weights and training epochs.
+      {
+        "stage_name": "movies queries training", # Custom name
+        "NumberOfEpochs": 0, # number of epochs for this stage. Remark: if you want to skip this stage, set it to 0.
+        "enabled_modals": [ # loss weights for each modal in this stage. Remark: the final loss is the sum of all losses, and each loss is multiplied by its corresponding weight.
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0} # model_all/engine/StageManager.py records all available losses. You can add new loss functions and corresponding weights here to customize the training process.
+        ],
+        'enable_print': False, # whether to print the selected edges in Adaptive Graph Modeling (AGM)
+        'save_dir': "./sim_char_4", # Directory to save the results of the selected edges.
+        'enable_save': True # whether to save the model after this stage. 
+      },
+      {
+        "stage_name": "all",
+        "NumberOfEpochs": 105,
+        "enabled_modals": [
+          "v": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6 },
+          "f": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4 },
+          "Lv": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6 },
+          "Lf": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4 },
+          "vf": {'clip_align': 1.0, 'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "./sim_char_2.edgeTest",
+        'enable_save': True
+      },
+    ],
+    "test_stage": { # test stage configuration, the setting is similar to training stages.
+      'enable_print': False, 
+      'save_dir': "./sim_char_2.edgeTest",
+      'v_weight': 0.6, # the weight of dynamic feature in C. Ablation Studies 1) Effects of Static and Dynamic Features
+      'f_weight': 0.4,
+    },
+    "CHECKPOINT_PERIOD": 5, # the period to save the model. 
+    "VAL_PERIOD": 5, # the period to evaluate the model on the validation set. Remark: -1 for no validation during training.
+    "RESUME": false, # Obsolete. Whether to resume training is now set via command line (or in the training code).
+    "RESUME_EPOCH": 211, # obsolete
+    "FREEZE_BERT": 400, # obsolete
+    "SKIP_TEST": 0, # Skip validation for the first N epochs. It is recommended to control this via the 'enable_save' setting instead.
+  },
+  "TEST": {
+    "BATCH_SIZE": 8, # batch size in test stage (recommend to set smaller than training stage)
+    "NMS_THRESH": 0.4, # Used to remove overlapping intervals.
+    "CONTRASTIVE_SCORE_POW": 0.3 # obsolete
+  },
+  "validation_functions": ["check_feat_len", "mask_pooling_list"], # Custom function to validate this config file.
+  "OUTPUT_DIR": "/media/zhangbolin/hu/OSGs/open_source/应该就是没用/checkpoints/" # the directory to save the model checkpoints.
+}

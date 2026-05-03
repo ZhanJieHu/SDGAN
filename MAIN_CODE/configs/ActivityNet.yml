@@ -1,0 +1,245 @@
+{
+  "MODEL": {
+    "DEVICE": "",
+    "ARCHITECTURE": "unet",
+    "VIDEO_MODE": "c3d",
+    "NUM_CLIPS": 64,
+    "merge_num": 2, # 8个clip汇聚成一个
+    "align_loss":{
+      "mode": "video",
+    },
+    "feature_merger": {
+      "mode":"max",
+    },
+    "hidden_dimension": 256,
+    "video": {
+      "encoder": {
+        "mode": "bimamba",
+        "v_feat_dim": 500,
+      },
+      "gnn": {
+        "mode": "GNNv3",
+        "GNN_LAYERS": 2,
+        "GNN_U": 5.0,
+        "GNN_STEP": 0.1
+      },
+      "temporal_feature_map": {
+        "mode": "pool",
+      },
+      "mask_1": {
+        "mode": "sparse",
+      },
+      "mask_2": {
+        "mode": "sparse",
+      },
+      "proposal_conv": {
+        "mode": 'pro',
+        "HIDDEN_SIZE": 512,
+        "KERNEL_SIZE": 9,
+        "NUM_STACK_LAYERS": 4
+      },
+      "LOSS": {
+        "iou_bce": {
+          "mode": 'decoupled',
+          "MIN_IOU": 0.5,
+          "MAX_IOU": 1.0
+        },
+        "ContrastiveLoss": {
+          "mode": 'decoupled',
+          "TAU_VIDEO": 0.1,
+          "TAU_SENT": 0.1,
+          "NEGATIVE_VIDEO_IOU": 0.5,
+          "NUM_POSTIVE_VIDEO_PROPOSAL": 1,
+          "SENT_REMOVAL_IOU": 0.5,
+          "MARGIN": 0.3
+        },
+      }
+    },
+    "frame": {
+      "encoder": {
+        "mode": "bimamba",
+        "f_feat_dim": 768
+      },
+      "gnn": {
+        "mode": "GNNv3",
+        "GNN_LAYERS": 2,
+        "GNN_U": 5.0,
+        "GNN_STEP": 0.1
+      },
+      "temporal_feature_map": {
+        "mode": "pool",
+      },
+      "mask_1": {
+        "mode": "sparse",
+      },
+      "mask_2": {
+        "mode": "sparse",
+      },
+      "proposal_conv": {
+        "mode": 'pro',
+        "HIDDEN_SIZE": 512,
+        "KERNEL_SIZE": 9,
+        "NUM_STACK_LAYERS": 4
+      },
+      "LOSS": {
+        "iou_bce": {
+          "mode": 'decoupled',
+          "MIN_IOU": 0.5,
+          "MAX_IOU": 1.0
+        },
+        "ContrastiveLoss": {
+          "mode": 'decoupled',
+          "TAU_VIDEO": 0.1,
+          "TAU_SENT": 0.1,
+          "NEGATIVE_VIDEO_IOU": 0.5,
+          "NUM_POSTIVE_VIDEO_PROPOSAL": 1,
+          "SENT_REMOVAL_IOU": 0.5,
+          "MARGIN": 0.3
+        },
+      }
+    },
+    "text": {
+      "encoder": {
+        "mode": "one"
+      },
+      "decoder": {
+        "mode": "two"
+      }
+    },
+    "pos_encoding": {
+      "mode": "none"
+    }
+  },
+  "DATASETS": {
+    "NAME": "S_aNet_vr",
+    "train_label": "/media/zhangbolin/hu/OSGs/open_source/MAIN_CODE/dataset/ActivityNet/train.json",
+    "test_label": "/media/zhangbolin/hu/OSGs/open_source/MAIN_CODE/dataset/ActivityNet/test.json",
+    "val_label": "/media/zhangbolin/hu/OSGs/open_source/MAIN_CODE/dataset/ActivityNet/val.json",
+    "video_feat": "/media/zhangbolin/datasets/activitynet/data/sub_activitynet_v1-3.c3d.hdf5",
+    "nclip_in_v_feat": 256, # 淘汰
+    "frame_feat": "/media/zhangbolin/datasets/activitynet/data/frame_feature",
+    "VideoSegmentTxt": "",
+    "f_feat_dim": 768,
+    "object_feat": "",
+    "text_feat": "/media/zhangbolin/hu/OSGs/UniSDNet/data/anet/text_distbert_feat",
+    "audio_feat": "",
+    "chinese_feat": ""
+  },
+  "DATALOADER": {
+    "NUM_WORKERS": 32
+  },
+  "SOLVER": {
+    "LR": 0.0008,
+    "BATCH_SIZE": 32,
+    "MILESTONES": "(7, 15)",
+    "training_stages": [
+      {
+        "stage_name": "Lclip",
+        "NumberOfEpochs": 5,
+        "enabled_modals": [
+          "Lv": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6 },
+          "Lf": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4 },
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': False
+      },
+      {
+        "stage_name": "clip",
+        "NumberOfEpochs": 5,
+        "enabled_modals": [
+          "v": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6 },
+          "f": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4 },
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+      {
+        "stage_name": "Lclip",
+        "NumberOfEpochs": 5,
+        "enabled_modals": [
+          "Lv": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6 },
+          "Lf": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4 },
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': False
+      },
+      {
+        "stage_name": "clip",
+        "NumberOfEpochs": 5,
+        "enabled_modals": [
+          "v": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6 },
+          "f": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4 },
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+      {
+        "stage_name": "Lclip",
+        "NumberOfEpochs": 5,
+        "enabled_modals": [
+          "Lv": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6 },
+          "Lf": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4 },
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+      {
+        "stage_name": "clip",
+        "NumberOfEpochs": 5,
+        "enabled_modals": [
+          "v": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6 },
+          "f": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4 },
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+      {
+        "stage_name": "Lclip",
+        "NumberOfEpochs": 2,
+        "enabled_modals": [
+          "Lv": {'iou_bce': 0.6, 'ContrastiveLoss': 0.6 },
+          "Lf": {'iou_bce': 0.4, 'ContrastiveLoss': 0.4 },
+          "vf": {'Lclip_align': 1.0},
+          "e": {'video_queries_loss':1.0, 'frame_queries_loss':1.0}
+        ],
+        'enable_print': False,
+        'save_dir': "",
+        'enable_save': True
+      },
+    ],
+    "test_stage": {
+      'enable_print': False,
+      'save_dir': "",
+      'v_weight': 0.72,
+      'f_weight': 0.28,
+    },
+    "CHECKPOINT_PERIOD": 8,
+    "VAL_PERIOD": 8, # 10
+    "RESUME": false,
+    "SKIP_TEST": 14,
+  },
+  "TEST": {
+    "BATCH_SIZE": 32,
+    "NMS_THRESH": 0.5,
+  },
+  "validation_functions": ["mask_pooling_list"],
+  "OUTPUT_DIR": "/media/zhangbolin/hu/OSGs/open_source/checkpoints/ActivityNet/"
+}

@@ -1,5 +1,12 @@
 # Static and Dynamic Graph Alignment Network for Temporal Video Grounding
 
+
+> 胡战捷, 张博麟, 王建华, 郑剑波, Chenchen Yan, Takahiro Komamizu, Ichiro Ide, 钱江波
+
+##### [Arxiv] (暂时处于审核状态)   
+
+##### [小红书](https://www.xiaohongshu.com/discovery/item/69f4061c0000000020039ab2?source=webshare&xhsshare=pc_web&xsec_token=LB2emC5KOcHQF3q_T1-PqerxqwGNzvrzDARYeBTn3uqF4=&xsec_source=pc_share)
+
 <p align="center">
   <a href="./README.md"><img alt="README in English" src="https://img.shields.io/badge/English-DBEDFA"></a>
   <a href="./README_zh.md"><img alt="简体中文版自述文件" src="https://img.shields.io/badge/简体中文-DFE0E5"></a>
