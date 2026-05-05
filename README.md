@@ -2,7 +2,9 @@
 
 > Zhanjie Hu, Bolin Zhang, Jianhua Wang, Jianbo Zheng, Chenchen Yan, Takahiro Komamizu, Ichiro Ide, Jiangbo Qian
 
-##### [Arxiv] (Currently under review.)   
+##### [Arxiv](https://arxiv.org/abs/2605.00684)   
+
+##### [Supplementary Material](https://arxiv.org/src/2605.00684v1/anc/Supplementary_Material.pdf)
 
 ##### [rednote](https://www.xiaohongshu.com/discovery/item/69f4061c0000000020039ab2?source=webshare&xhsshare=pc_web&xsec_token=LB2emC5KOcHQF3q_T1-PqerxqwGNzvrzDARYeBTn3uqF4=&xsec_source=pc_share)
 

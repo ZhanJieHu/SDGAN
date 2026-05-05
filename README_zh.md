@@ -2,8 +2,10 @@
 
 
 > 胡战捷, 张博麟, 王建华, 郑剑波, 严晨宸, Takahiro Komamizu, Ichiro Ide, 钱江波
+  
+##### [Arxiv](https://arxiv.org/abs/2605.00684)   
 
-##### [Arxiv] (暂时处于审核状态)   
+##### [补充材料](https://arxiv.org/src/2605.00684v1/anc/Supplementary_Material.pdf)
 
 ##### [小红书](https://www.xiaohongshu.com/discovery/item/69f4061c0000000020039ab2?source=webshare&xhsshare=pc_web&xsec_token=LB2emC5KOcHQF3q_T1-PqerxqwGNzvrzDARYeBTn3uqF4=&xsec_source=pc_share)
 
