@@ -1,7 +1,7 @@
 # Static and Dynamic Graph Alignment Network for Temporal Video Grounding
 
 
-> 胡战捷, 张博麟, 王建华, 郑剑波, Chenchen Yan, Takahiro Komamizu, Ichiro Ide, 钱江波
+> 胡战捷, 张博麟, 王建华, 郑剑波, 严晨宸, Takahiro Komamizu, Ichiro Ide, 钱江波
 
 ##### [Arxiv] (暂时处于审核状态)   
 
