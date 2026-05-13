@@ -37,9 +37,9 @@ corresponds to given language queries.
 
 ## Innovation
 
-![the proposed SDGAN](./images/1b_0313.png)
+![the proposed SDGAN](./images/2_0326.JPG)
 
-The figure above provides a simple illustration of the proposed **Static and Dynamic Graph Alignment Network (SDGAN)**. The model introduces three key innovations:
+The figure above provides an illustration of the proposed **Static and Dynamic Graph Alignment Network (SDGAN)**. The model introduces three key innovations:
 
 - **Effective exploitation of both static and dynamic visual features**:  
   Unlike existing methods that typically rely on either static or dynamic visual features alone, SDGAN successfully integrates both. It employs several techniques — including **Position-wise Nodes Alignment** (as shown in the figure) — to effectively exploit and mitigate the semantic discrepancy between static and dynamic features. 
