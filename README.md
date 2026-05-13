@@ -39,7 +39,7 @@ corresponds to given language queries.
 
 ![the proposed SDGAN](./images/1b_0313.png)
 
-The figure above provides a simple illustration of the proposed **Static and Dynamic Graph Alignment Network (SDGAN)**. The model introduces two key innovations:
+The figure above provides a simple illustration of the proposed **Static and Dynamic Graph Alignment Network (SDGAN)**. The model introduces three key innovations:
 
 - **Effective exploitation of both static and dynamic visual features**:  
   Unlike existing methods that typically rely on either static or dynamic visual features alone, SDGAN successfully integrates both. It employs several techniques — including **Position-wise Nodes Alignment** (as shown in the figure) — to effectively exploit and mitigate the semantic discrepancy between static and dynamic features. 
@@ -48,6 +48,8 @@ The figure above provides a simple illustration of the proposed **Static and Dyn
   GCN-based approaches construct temporal graphs in a query-agnostic manner, where video features interact according to predefined rules without guidance from the video content or the specific query.  
   To address this limitation, SDGAN introduces **Query–Clip Contrastive Learning** and **Adaptive Graph Modeling** (illustrated in the figure). This query-aware approach produces more discriminative node representations, leading to stronger temporal graph modeling.
 
+- **Progressive Easy-to-Hard Training (PEHT) strategy**:  
+  Existing temporal video grounding methods mostly adopt single-granularity temporal modeling and lack progressive optimization paradigms, leading to unstable training, insufficient robustness, and limited localization performance. To address these issues, we propose a Progressive Easy-to-Hard Training (PEHT) strategy inspired by curriculum learning, which organically combines coarse-grained semantic localization and fine-grained temporal boundary optimization. During training, the model alternately optimizes dual branches across epochs: it first focuses on coarse-grained semantic matching to quickly locate query-related video segments, and then gradually performs fine-grained boundary refinement to achieve precise temporal grounding, effectively improving model stability and generalization performance.
 
 The detailed mechanisms are presented in the paper.
 ## Project Structure
